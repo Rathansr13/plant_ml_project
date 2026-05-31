@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Plant Disease Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <span class="leaf-icon">🌿</span>
+      <span>PlantGuard AI</span>
+    </div>
+    <nav>
+      <a href="#upload">Detect</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#diseases">Diseases</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <h1>Detect Plant Diseases<br/><span class="highlight">Instantly with AI</span></h1>
+    <p class="hero-sub">Upload a leaf photo and get disease diagnosis, treatment steps, and recommended supplements in seconds.</p>
+    <a href="#upload" class="btn-primary">Start Detection →</a>
+  </div>
+</section>
+
+<!-- ── UPLOAD SECTION ── -->
+<section id="upload" class="section">
+  <div class="container">
+    <h2 class="section-title">Upload Leaf Image</h2>
+
+    <div class="upload-card">
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-content" id="dropContent">
+          <div class="drop-icon">📷</div>
+          <p class="drop-text">Drag & drop a leaf image here</p>
+          <p class="drop-sub">or</p>
+          <label class="btn-secondary" for="fileInput">Browse File</label>
+          <input type="file" id="fileInput" accept="image/*" hidden/>
+          <p class="drop-hint">Supported: JPG, PNG, WEBP (max 10 MB)</p>
+        </div>
+        <img id="previewImg" class="preview-img hidden" alt="Preview"/>
+      </div>
+
+      <div class="upload-actions">
+        <button class="btn-primary" id="analyzeBtn" disabled>🔍 Analyze Plant</button>
+        <button class="btn-ghost" id="clearBtn">Clear</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results" class="results hidden">
+      <div class="result-grid">
+
+        <!-- Prediction card -->
+        <div class="card">
+          <h3>🎯 Detection Result</h3>
+          <div id="topPrediction" class="top-prediction"></div>
+          <div class="confidence-bar-wrap">
+            <div class="confidence-bar" id="confBar"></div>
+          </div>
+          <div id="top3List" class="top3-list"></div>
+        </div>
+
+        <!-- Disease info -->
+        <div class="card">
+          <h3>📋 Disease Information</h3>
+          <img id="diseaseImg" class="disease-img" src="" alt="Disease"/>
+          <p id="diseaseDesc" class="disease-desc"></p>
+        </div>
+
+        <!-- Treatment steps -->
+        <div class="card full-width">
+          <h3>💊 Treatment Steps</h3>
+          <ol id="treatmentSteps" class="steps-list"></ol>
+        </div>
+
+        <!-- Supplement -->
+        <div class="card supplement-card hidden" id="supplementCard">
+          <h3>🛒 Recommended Supplement</h3>
+          <div class="supplement-inner">
+            <img id="suppImg" src="" alt="Supplement" class="supp-img"/>
+            <div>
+              <p id="suppName" class="supp-name"></p>
+              <a id="suppLink" href="#" target="_blank" class="btn-primary">Buy Now →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader hidden">
+      <div class="spinner"></div>
+      <p>Analyzing your plant…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section id="how-it-works" class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h4>Upload Image</h4>
+        <p>Take a clear photo of the affected leaf and upload it.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h4>AI Analysis</h4>
+        <p>Our MobileNetV2 model analyzes the image across 39 disease classes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h4>Get Diagnosis</h4>
+        <p>Receive disease name, description, and confidence score.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h4>Treat & Recover</h4>
+        <p>Follow the step-by-step treatment plan and buy supplements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DISEASE BROWSER ── -->
+<section id="diseases" class="section">
+  <div class="container">
+    <h2 class="section-title">Disease Library</h2>
+    <input class="search-box" id="searchBox" placeholder="Search disease or plant…" type="text"/>
+    <div class="disease-grid" id="diseaseGrid">
+      <p class="loading-text">Loading diseases…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <p>🌿 PlantGuard AI — Powered by TensorFlow & PlantVillage Dataset</p>
+    <p class="footer-sub">For educational use. Always consult an agronomist for critical crop decisions.</p>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
